@@ -1,0 +1,9 @@
+- Alt + Ctrl: thêm con trỏ
+- Ctrl + Alt + Down: thêm con trỏ từ trên xuống
+- Ctrl + D: chọn 1 từ hoặc từ giống nhau
+- Ctrl + Shift + -> : chọn 1 từ
+- Shift + Alt + -> : chọn nguyên content trong {}
+
+- div>div
+- div + div
+- div>ul>li*2
