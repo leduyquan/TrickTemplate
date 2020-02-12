@@ -1,0 +1,27 @@
+name: function(module) {
+                    switch(module){
+                        case "a":
+                            return "hahahah";
+                        case "b":
+                            return "bbbbbbb";
+                        case "c":
+                            return "cccccc";
+                        case "d":
+                            return "ddđ";
+                        case "e":
+                            return "eeeee";
+                        case "f":
+                            return "fffff";
+                        case "g":
+                            return "ggggg";
+                     }
+                }
+                
+=>
+
+func (module) {
+	return {
+		"te": "haha"
+	}[module]
+}
+
