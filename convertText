@@ -25,3 +25,11 @@ func (module) {
 	}[module]
 }
 
+có thể lưu trữ function trong 1 object
+
+const obj = {
+	name: 'Quan',  -> property
+	greet: function greet (){     -> method
+		console.log('haha');
+	}	
+}
