@@ -1,19 +1,20 @@
 onToggle: function( item, index ) {
-                    this._updateChildren( item, index );
-                    this._updateParents( item, index );
-                },
-                _updateChildren: function (item, index){
-                    const children = item.children;
-                    if (_.isEmpty(children)) return;
+       this._updateChildren( item, index );
+       this._updateParents( item, index );
+},
 
-                    children.map(x => {
-                        if (!_.isEmpty(x.permissions)) {
-                            x.permissions[index].selected = item.permissions[index].selected;
-                            x.permissions[index].indeterminate = false;
-                        }
-                        this._updateChildren(x, index);
-                    });
-                },
+_updateChildren: function (item, index){
+       const children = item.children;
+       if (_.isEmpty(children)) return;
+
+       children.map(x => {
+              if (!_.isEmpty(x.permissions)) {
+                     x.permissions[index].selected = item.permissions[index].selected;
+                     x.permissions[index].indeterminate = false;
+              }
+              this._updateChildren(x, index);
+       });
+},
                 _updateParents: function( item, index ) {
                     const parent = this._getParentNode(this.form.modules, item.parent_id);
                     if (_.isEmpty(parent)) return;
