@@ -1,6 +1,7 @@
 onToggle: function( item, index ) {
        this._updateChildren( item, index );
        this._updateParents( item, index );
+       item.permissions[index].indeterminate = false;
 },
 
 _updateChildren: function (item, index){
