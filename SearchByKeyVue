@@ -1,0 +1,106 @@
+HTML
+ <el-input v-model='searchKey' class="search-box" :placeholder="$t('vehicle.search')"><i
+                               slot="suffix" class="el-input__icon el-icon-search"></i></el-input>
+ <v-pagination :total="filterData.length" :page-size="pageSize" :current-page="currentPage"></v-pagination>
+                        <el-pagination
+                                @current-change="handleCurrentChange"
+                                :current-page.sync="currentPage"
+                                :page-sizes="pageSizes"
+                                :page-size="pageSize"
+                                layout="prev, next"
+                                :total="filterData.length">
+                        </el-pagination>
+    
+    
+Javascript
+data: searchKey: '',
+innerSearchKey: '',
+
+watch: {
+                searchKey() {
+                    this.updateInnerSearchKey()
+                }
+            },
+
+method
+updateInnerSearchKey: Lodash.debounce(function () {
+                    this.innerSearchKey = this.searchKey.toLowerCase().trim();
+                }, 200),
+currentTableData: function () {
+                    let from = this.pageSize * (this.currentPage - 1);
+                    let to = from + this.pageSize;
+                    return this.sortedData.slice(from, to);
+                },
+
+computed: {
+              
+                filterData: function () {
+                    var self = this;
+                    if (!this.innerSearchKey)
+                        return self.models.slice();
+                    else
+                        return self.models.filter(function (row) {
+                            var found = false;
+                            if (row != null && (typeof row == "object")) {
+                                Object.keys(row).map(function (propName, index) {
+                                    var propValue = row[propName];
+                                    if (propValue != null && (typeof propValue == "object")) {
+                                        Object.keys(propValue).map(function (childPropName, index) {
+                                            var propChildValue = propValue[childPropName];
+                                            if (propChildValue) {
+                                                propChildValue = propChildValue.toString().toLowerCase().trim();
+                                                if (propChildValue.includes(self.innerSearchKey)) {
+                                                    found = true;
+                                                }
+                                            }
+                                        });
+                                    }
+                                    else {
+                                        if (propValue) {
+                                            propValue = propValue.toString().toLowerCase().trim();
+                                            if (propValue.includes(self.innerSearchKey)) {
+                                                found = true;
+                                            }
+                                        }
+                                    }
+                                });
+                            }
+                            if (found) return row;
+                        })
+                },
+                sortedData: function () {
+                    let sortedData = this.filterData.slice();
+                    if (this.sortData.order) {
+                        let order = this.sortData.order;
+                        let prop = this.sortData.prop;
+                        let isDescending = order === 'descending';
+                        sortedData.sort(function (a, b) {
+                            var dataA = a[prop] === null ? '' : a[prop];
+                            var dataB = b[prop] === null ? '' : b[prop];
+                            if (prop == "UpdatedDateTime") {
+                                dataA = moment(a[prop]).format('YYYYMMDDHHmmss');
+                                dataB = moment(b[prop]).format('YYYYMMDDHHmmss');
+                                return dataA.localeCompare(dataB, 'en', {'numeric': true});
+                            } else {
+                                if (isNaN(dataA) || isNaN(dataB)) {
+                                    return dataA.toLowerCase().localeCompare(dataB.toLowerCase(), 'en', {'sensitivity': 'base'});
+                                } else {
+                                    if (dataA > dataB) {
+                                        return 1
+                                    } else if (dataA < dataB) {
+                                        return -1
+                                    } else {
+                                        return 0
+                                    }
+                                }
+                            }
+                        });
+                        if (isDescending) {
+                            sortedData.reverse()
+                        }
+                    }
+                    return sortedData
+                },
+                
+                
+                
