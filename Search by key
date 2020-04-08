@@ -44,6 +44,11 @@ computed: {
                 },
 }
 
+watch: {
+                searchKey() {
+                    this.updateInnerSearchKey()
+                }
+            },
 
 function
 updateInnerSearchKey: Lodash.debounce(function () {
