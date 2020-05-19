@@ -1,3 +1,4 @@
+//HTML
 <div :id="'alert'+item.id" class="modal custom-modal fade" data-backdrop="false">
     <div class="modal-dialog modal-sm plate-modal">
         <div id="content" class="modal-content modal-background">
@@ -25,7 +26,8 @@
         </div>
     </div>
 </div>
-    
+
+//Javascript
 mounted() {
     const id = '#alert' + this.item.id;
     $(id).modal("show");
