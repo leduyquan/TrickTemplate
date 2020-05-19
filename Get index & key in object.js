@@ -1,5 +1,5 @@
-1. Get Index by key
+// Get Index by key
 const index = Object.keys(object).indexOf(key);
 
-2. Get key by index
+// Get key by index
 const key = Object.keys(object)[index];
