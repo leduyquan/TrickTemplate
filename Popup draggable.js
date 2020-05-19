@@ -26,7 +26,7 @@
     </div>
 </div>
     
-mouted() {
+mounted() {
     const id = '#alert' + this.item.id;
     $(id).modal("show");
     /* This is add resize and move*/
@@ -53,8 +53,6 @@ mouted() {
         $(".custom-modal").removeClass("modal");
     });
 
-    //console.log('$(window).width()',$(window).width());
-    //console.log('fdsafas',$('#content').width())
     $(id).css({
         "padding-left": $(window).width() - $('#content').width() - 310 - 90*this.index,
         "padding-top": 45 + 65*this.index
