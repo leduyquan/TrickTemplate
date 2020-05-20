@@ -24,7 +24,7 @@ convertName(module) {
 
 
 // Example 2:
-fetchData(a, b){
+fetchData(a, b, section){
 	switch (section.id) {
 		case 'traffic': {
 			self._fetchTrafficData(a, b);
@@ -51,7 +51,7 @@ fetchData(a, b){
 }
 
 // you can also do this
-fetchData(a, b) {
+fetchData(a, b, section) {
 	return {
 		traffic: self._fetchTrafficData,
 		sales: self._fetchSalesData,
